@@ -15,4 +15,5 @@ class Solution(object):
         for i in range(2, b + 1):
             if b % i == 0:
                 list_b.append(i)
+        # get intersection of two lists
         return len([x for x in list_a if x in list_b]) + 1
