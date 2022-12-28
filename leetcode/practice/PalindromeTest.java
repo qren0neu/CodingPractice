@@ -1,6 +1,6 @@
 package leetcode.practice;
 
-public class Palindrome {
+public class PalindromeTest {
     int maxStart = 1001;
     int maxEnd = 0;
 
