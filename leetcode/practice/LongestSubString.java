@@ -12,7 +12,7 @@ public class LongestSubString {
             Map<Character, Integer> map = new HashMap<>();
             int left = 0, right = 0, n = s.length();
             int res = 0, k = 2;
-            char pre = chars[left];
+            // char pre = chars[left];
             while (right < n) {
                 if (map.size() == k && !map.containsKey(chars[right])) {
                     int leftMost = n;
