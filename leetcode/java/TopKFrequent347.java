@@ -51,6 +51,7 @@ public class TopKFrequent347 {
             Comparator<Integer> myComparator = new Comparator<Integer>() {
                 @Override
                 public int compare(Integer o1, Integer o2) {
+                    // reverse order
                     return busket.get(o2) - busket.get(o1);
                 }
             };
