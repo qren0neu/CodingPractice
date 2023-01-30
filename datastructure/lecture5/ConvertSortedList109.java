@@ -63,7 +63,7 @@ public class ConvertSortedList109 {
             }
             ListNode slow = head;
             ListNode fast = head;
-            while (fast != tail) {
+            while (fast != tail && fast.next != tail) {
                 slow = slow.next;
                 fast = fast.next.next;
             }

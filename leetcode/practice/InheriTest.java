@@ -19,5 +19,8 @@ public class InheriTest {
 
     public static class Parent {
 
+        public Parent() {
+            System.out.println("I'm the parent.");
+        }
     }
 }
