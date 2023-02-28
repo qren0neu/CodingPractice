@@ -23,4 +23,26 @@ public class LIS300 {
             return max;
         }
     }
+
+    class Solution2 {
+        public int lengthOfLIS(int[] nums) {
+            int[] dp = new int[nums.length];
+            dp[0] = 1;
+            int max = 1;
+            for (int i = 1; i < nums.length; i++) {
+                
+            }
+            return max;
+        }
+
+        public int binarySearch(int[] dp, int target) {
+            int left = 0;
+            int right = dp.length - 1;
+            int mid = left + (right - left) / 2;
+            while (left < right) {
+                int midVal = dp[mid];
+                
+            }
+        }
+    }
 }
