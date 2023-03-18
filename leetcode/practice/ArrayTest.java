@@ -1,5 +1,7 @@
 package leetcode.practice;
 
+import java.util.Arrays;
+
 public class ArrayTest<T> {
     public static void main(String[] args) {
         Comparable[] comArr = new Comparable[4];
@@ -11,6 +13,8 @@ public class ArrayTest<T> {
                 return 0;
             };
         };
+        Arrays.sort(objArr3);
+        Arrays.binarySearch(objArr3, o);
     }
 
     public void testMethod() {
