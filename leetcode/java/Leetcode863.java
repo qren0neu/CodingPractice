@@ -1,8 +1,11 @@
 package leetcode.java;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
 
 public class Leetcode863 {
     /**
@@ -15,63 +18,58 @@ public class Leetcode863 {
      * }
      */
     class Solution {
-
-        // store the distance from root
-    private Map<Integer, List<Integer>> disMapLeft = new HashMap<Integer, Integer>;
-    private Map<Integer, List<Integer>> disMapRight = new HashMap<Integer, Integer>;
-        private int targetDistance;
-        private boolean targetIsLeft;
-
-    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
-        List<Integer> res = new LinkedList();
-        if (k == 0) {
-            res.add(root.val);
-            return res;
+        public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+            List<Integer> result = new ArrayList<>();
+            Map<TreeNode, TreeNode> parent = new HashMap<>();
+            findParent(root, null, parent);
+            findNodes(target, k, result, parent);
+            return result;
         }
-        helper(root, target, k, dis, true);
-        helper(root, target, k, dis, false);
-        if (targetIsLeft) {
-            if (k > targetDistance) {
-                // go over the root
-                int dis1 = targetDistance - k;
 
-            } else {
-                // not go over the root
-            
-            }
-            int dis2 = targetDistance 
-        } else {
-            if (k > targetDistance) {
-                // go over the root
-
-            } else {
-                // not go over the root
-            
-            }
-        }
-    }
-
-        public void helper(TreeNode root, TreeNode target, int k, int dis, boolean isleft) {
-            if (root == null) {
+        private void findParent(TreeNode node, TreeNode parentNode, Map<TreeNode, TreeNode> parent) {
+            if (node == null) {
                 return;
             }
-            if (root.val = target.val) {
-                targetDistance = dis;
-                targetIsLeft = isleft;
+            parent.put(node, parentNode);
+            findParent(node.left, node, parent);
+            findParent(node.right, node, parent);
+        }
+
+        private void findNodes(TreeNode node, int k, List<Integer> result, Map<TreeNode, TreeNode> parent) {
+            if (node == null) {
+                return;
             }
-            List<Integer> valuesOfDis = isleft ? disMapLeft.get(dis) : disMapRight.get(root.val);
-            if (null == valuesOfDis) {
-                valuesOfDis = new LinkedList<>();
+            if (k == 0) {
+                result.add(node.val);
+                return;
             }
-            valuesOfDis.add(root.val);
-            if (isleft) {
-                disMapLeft.put(dis, valuesOfDis);
-            } else {
-                disMapRight.put(dis, valuesOfDis);
+            Set<TreeNode> visited = new HashSet<>();
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(node);
+            visited.add(node);
+            int dist = 0;
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                for (int i = 0; i < size; i++) {
+                    TreeNode curr = queue.poll();
+                    if (curr.left != null && visited.add(curr.left)) {
+                        queue.offer(curr.left);
+                    }
+                    if (curr.right != null && visited.add(curr.right)) {
+                        queue.offer(curr.right);
+                    }
+                    if (parent.get(curr) != null && visited.add(parent.get(curr))) {
+                        queue.offer(parent.get(curr));
+                    }
+                }
+                dist++;
+                if (dist == k) {
+                    for (TreeNode n : queue) {
+                        result.add(n.val);
+                    }
+                    return;
+                }
             }
-            helper(root.left, target, k, dis + 1, isleft);
-            helper(root.right, target, k, dis + 1, isleft);
-            return;
         }
     }
 
