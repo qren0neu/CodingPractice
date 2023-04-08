@@ -1,5 +1,7 @@
 package leetcode.java;
 
+import java.util.PriorityQueue;
+
 /**
  * https://leetcode.com/problems/word-search/description/
  * 
